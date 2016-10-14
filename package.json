@@ -1,0 +1,26 @@
+{
+  "name": "hopper",
+  "version": "0.1.0",
+  "description": "A simplistic Maven artifact manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github"
+  },
+  "keywords": [
+    "maven",
+    "artifact_manager",
+    "proxy"
+  ],
+  "author": "bibo38",
+  "license": "ISC",
+  "dependencies": {
+    "js-yaml": "^3.6.1",
+    "request": "^2.75.0",
+    "rest": "^2.0.0",
+    "xml2js": "^0.4.17"
+  }
+}

@@ -1,0 +1,20 @@
+plugins {
+	id 'java'
+	id 'maven'
+}
+
+repositories {
+	maven { url = 'http://localhost:8000/' }
+}
+
+dependencies {
+	compile group: 'org.apache', name: 'todo', version: '1.0'
+}
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			repository(url: 'file://localhost/tmp/myRepo/')
+		}
+	}
+}
