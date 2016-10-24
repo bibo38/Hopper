@@ -2,14 +2,23 @@ remotes:
   central: https://maven.central/
 
 routing:
-  /:
+  /private:
     '*':
     - todo
     'org.apache:*':
     - central
+  /public:
+    '*':
+    - todo
+  /public/apache:
+    '*':
+    - central 
 
 misc:
   use_regex: false
+
+repository:
+  location: repo
 
 server:
   port: 80

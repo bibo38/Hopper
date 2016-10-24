@@ -1,15 +1,36 @@
 const http = require('http')
 const url = require('url')
 const yaml = require('js-yaml')
+const fs = require('fs')
+const Artifact = require('./artifact.js')
+
+const cfg = yaml.safeLoad(fs.readFileSync('config.yaml', 'utf8'))
+console.log(cfg)
 
 const server = http.createServer((req, res) => {
-	let reqSplit = req.url.substr(1).split('/')
+	res.setHeader('Server', 'Apache/2.4.23 (Unix)')
+	
+	let routingPathPossibilities =
+		Object.keys(cfg.routing)
+		.filter(path => req.url.startsWith(path))
+	if(!routingPathPossibilities.length)
+	{
+		res.writeHead(404)
+		res.end()
+		return
+	}
+	let routingPath = routingPathPossibilities
+		.reduce((prev, cur) => prev.length > cur.length ? pref : cur)
+	
+	let reqSplit = req.url.substr(routingPath.length).replace(/^\//, '').split('/')
 	let file = reqSplit.pop()
 	let version = reqSplit.pop()
 	let name = reqSplit.pop()
 	let group = reqSplit.join('.')
+	let artifact = new Artifact(group, name, version)
 
-	console.log(`${group}:${name}:${version}     ${file}`)
+	console.log(`${artifact.mavenName}     ${file} via ${routingPath}`)
+
 	res.end()
 })
 server.listen(8000)
