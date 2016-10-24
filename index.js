@@ -8,7 +8,7 @@ const cfg = yaml.safeLoad(fs.readFileSync('config.yaml', 'utf8'))
 console.log(cfg)
 
 const server = http.createServer((req, res) => {
-	res.setHeader('Server', 'Apache/2.4.23 (Unix)')
+	res.setHeader('Server', cfg.server.name)
 	
 	let routingPathPossibilities =
 		Object.keys(cfg.routing)
@@ -16,7 +16,7 @@ const server = http.createServer((req, res) => {
 	if(!routingPathPossibilities.length)
 	{
 		res.writeHead(404)
-		res.end()
+		fs.createReadStream(cfg.server.error_page).pipe(res)
 		return
 	}
 	let routingPath = routingPathPossibilities

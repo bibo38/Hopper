@@ -22,6 +22,7 @@ repository:
 
 server:
   port: 80
+  name: Apache/2.4.23 (Unix)
   ssl:
     public_key: x.test
     private_key: y.test

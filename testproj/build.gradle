@@ -7,7 +7,7 @@ version = 0.7
 group = 'test.artifact'
 
 repositories {
-	maven { url = 'http://localhost:8000/' }
+	maven { url = 'http://localhost:8000/pub' }
 }
 
 dependencies {

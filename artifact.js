@@ -13,4 +13,15 @@ module.exports = class
   {
     return `${this.group}:${this.name}:${this.version}`
   }
+  
+  get valid()
+  {
+    return !!this.group && !!this.name && !!this.version
+  }
+  
+  isFileValid(filename)
+  {
+    let checkRegex = new RegExp(`${this.name}-${this.version}\.(jar|pom(\.(sha1|md5))?)`)
+    return filename.match(checkRegex)
+  }
 }
